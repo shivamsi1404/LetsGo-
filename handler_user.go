@@ -37,4 +37,9 @@ func (apiCfg *apiconfig) handlerCreateUser(w http.ResponseWriter, r *http.Reques
 	}
 
 	respondWithJSON(w, 200, databaseusertouser(user))
-}	
+}
+
+func (apiCfg *apiconfig) handlerGetUser(w http.ResponseWriter, r *http.Request) {
+	// while creating use we dont need authentication but while accessing a user we need a serious authenticatio 
+	
+}
