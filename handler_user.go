@@ -7,7 +7,6 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/shivamsi1404/LetsGo-/internal/auth"
 	"github.com/shivamsi1404/LetsGo-/internal/database"
 )
 
@@ -40,21 +39,7 @@ func (apiCfg *apiconfig) handlerCreateUser(w http.ResponseWriter, r *http.Reques
 	respondWithJSON(w, 201, databaseusertouser(user))
 }
 
-func (apiCfg *apiconfig) handlerGetUser(w http.ResponseWriter, r *http.Request) {
-	// while creating use we dont need authentication but while accessing a user we need a serious authenticatio 
-
-	apikey,err := auth.GetApiKey(r.Header)
-
-	if err != nil {
-		respondWitherror(w,400,fmt.Sprint("Auth error : %v",err))
-		return
-	}
-
-	user , err := apiCfg.DB.GetUserByApiKey(r.Context(),apikey)
-	if err != nil {
-		respondWitherror(w,400,fmt.Sprint("Couldnt get user : %v",err))
-		return
-	}
+func (apiCfg *apiconfig) handlerGetUser(w http.ResponseWriter, r *http.Request, user database.User) {
 
 	respondWithJSON(w,200,databaseusertouser(user))
 }

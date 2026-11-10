@@ -64,7 +64,7 @@ func main() {
 	v1router.Get("/healthz",handlerReadiness)
 	v1router.Get("/err",handlerErr)
 	v1router.Post("/users",apicfg.handlerCreateUser)
-	v1router.Get("/users",apicfg.handlerGetUser)
+	v1router.Get("/users",apicfg.middlewareAuth(apicfg.handlerGetUser))
 	router.Mount("/v1",v1router)
 
 	server := &http.Server{
