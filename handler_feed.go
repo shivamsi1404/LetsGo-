@@ -35,7 +35,7 @@ func (apiCfg *apiconfig) handlerCreateFeed(w http.ResponseWriter, r *http.Reques
 		UserID: user.ID,
 	})
 	if err != nil {
-		respondWitherror(w,400,fmt.Sprintf("couldnt creaate user %s",err))
+		respondWitherror(w,400,fmt.Sprintf("couldnt creaate feed %s",err))
 		return
 	}
 
