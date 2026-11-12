@@ -6,13 +6,13 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/cors"
 	"github.com/joho/godotenv"
+	_ "github.com/lib/pq"
 	"github.com/shivamsi1404/LetsGo-/internal/database"
-	 _ "github.com/lib/pq"
-
 )
 
 type apiconfig struct{
@@ -43,11 +43,13 @@ func main() {
 		log.Fatal("database not connected",err)
 	}
 
-	queries := database.New(conn)
+	db := database.New(conn)
 
 	apicfg := apiconfig{
-		DB: queries,
+		DB: db,
 	}
+
+	go startscrapping(db,10,time.Minute)
 
 	router := chi.NewRouter()
 
