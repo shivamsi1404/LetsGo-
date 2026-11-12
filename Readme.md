@@ -92,6 +92,7 @@ The server will be running at `http://localhost:8080`.
 - Support for multiple feed types, including Atom
 - UI/UX for browsing feeds and posts
 - Save specific posts to a personal library
+- Deploy
 
 ## Author
 
